@@ -66,7 +66,7 @@ ca_childcare <- counties |>
 # Collapse counties into Census regions
 ca_childcare <- ca_childcare |>
   mutate(region = fct_collapse(county_name,
-                               "Superior California" = c("Butte County", "Colusa County", "Del Norte County", "Glenn County", "Humboldt County", "Lassen County", "Modoc County", "Plumas County", "Shasta County", "Sierra County", "Siskiyou County", "Tehama County", "Trinity County"),
+                               "Superior California" = c("Butte County", "Colusa County", "Del Norte County", "Glenn County", "Humboldt County", "Lassen County", "Modoc County", "Plumas County", "Shasta County", "Sierra County", "Siskiyou County", "Tehama County", "Trinity County", "Lake County", "Mendocino County"),
                                "San Francisco Bay Area" = c("Alameda County", "Contra Costa County", "Marin County", "Napa County", "San Francisco County", "San Mateo County", "Santa Clara County", "Solano County", "Sonoma County"),
                                "Northern San Joaquin Valley" = c("San Joaquin County", "Stanislaus County", "Merced County"),
                                "Sacramento Area" = c("El Dorado County", "Placer County", "Sacramento County", "Sutter County", "Yolo County", "Yuba County"),
@@ -85,7 +85,13 @@ ca_childcare <- ca_childcare |>
 
 ```{r}
 #| label: median-income-by-region-over-time
-
+ca_childcare_data <- ca_childcare |>
+  filter(study_year == 2008 |
+           study_year == 2018) |>
+  group_by(region, study_year) |>
+  summarise(median_income = median(mhi_2018)) |>
+  arrange(median_income) |>
+  pivot_wider(names_from = study_year, values_from = median_income) 
 ```
 
 
