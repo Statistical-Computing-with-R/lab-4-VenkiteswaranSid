@@ -1,9 +1,21 @@
 ---
 title: "Lab 4: Childcare Costs in California"
-author: "Your name here!"
-format: html
+author: "Siddharth Venkiteswaran"
+format: 
+  html:  
+    embed-resources: true
+    code-tools: true
+    toc: true
+    toc-depth: 2
 editor: source
-embed-resources: true
+message: false
+warning: false
+code-fold: true
+theme: cyborg
+execute: 
+  echo: true
+  output: true
+  error: false
 ---
 
 ## The Data
@@ -17,7 +29,7 @@ The data come to us from [TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ```{r}
 #| label: setup
-
+library(tidyverse)
 ```
 
 ```{r}
@@ -29,6 +41,7 @@ counties <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytues
 ```
 
 **1. Briefly describe the dataset (~ 4 sentences). What information does it contain?**
+The childcare costs data set contains 61 columns, each of which is a specific variable. It also has 34567 observations, and each specific observation is a study conducted in a specific county. The information in each of these rows pertains to the demographic of the county, as well as financial information about it. 
 
 ## California Childcare Costs
 
