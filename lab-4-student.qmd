@@ -52,7 +52,9 @@ Let's start by focusing only on California.
 
 ```{r}
 #| label: ca-childcare-costs
-
+ca_childcare <- counties |>
+  inner_join(childcare_costs) |>
+  filter(state_abbreviation == "CA")
 ```
 
 **3. Using a function from the `forcats` package, complete the code below to create a new variable where each county is categorized into one of the [10 Census regions](https://census.ca.gov/regions/) in California. Use the Region description (from the plot), not the Region number.**  
