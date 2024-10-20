@@ -162,10 +162,12 @@ ggplot(ca_childcare, aes(x = mhi_2018,
 
 ```{r}
 # complete the code provided
-reg_mod1 <- lm()
+reg_mod1 <- lm(mc_infant ~ mhi_2018, data = ca_childcare)
 summary(reg_mod1)
 ```
 
 **9. Using the output from `summary()`, write out the estimated regression line (recall: $y = mx + b$).**
+y = 0.00241x + 131.7
 
 **10. Do you have evidence to conclude there is a relationship between the median household income and the median weekly cost of center-based childcare for infants in California? Cite values from your `summary()` output to support your claim!**
+
