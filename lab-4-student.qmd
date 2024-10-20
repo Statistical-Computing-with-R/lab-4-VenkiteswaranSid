@@ -170,4 +170,4 @@ summary(reg_mod1)
 y = 0.00241x + 131.7
 
 **10. Do you have evidence to conclude there is a relationship between the median household income and the median weekly cost of center-based childcare for infants in California? Cite values from your `summary()` output to support your claim!**
-
+The p-value that we obtained from this test was 2.2e-16, which is extremely small and is less than the 0.05 significance level. Thus, this gives us extremely strong evidence against the null hypothesis that there is no relationship between median household income and median weekly cost of center based childcare for children in California. From this, we can conclude that there does appear to be a relationship between these two variables. 
