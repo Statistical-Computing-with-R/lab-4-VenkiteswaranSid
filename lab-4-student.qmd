@@ -119,6 +119,13 @@ ca_childcare |>
   pivot_longer(cols = mc_infant:mc_preschool,
                names_to = "childcare_level",
                values_to = "median_cost") |>
+  mutate(across(
+    childcare_level, 
+    ~fct(., 
+            levels = c(
+              "mc_infant",
+              "mc_toddler",
+              "mc_preschool")))) |>
   ggplot(mapping = aes(
     x = study_year,
     y = median_cost,
@@ -134,7 +141,8 @@ ca_childcare |>
                                      "mc_toddler" = "Toddler"))) + 
   scale_y_continuous(limits = c(100, 500)) +
   scale_x_continuous(breaks = seq(2008, 2018, by = 2)) +
-  theme(axis.text.x = element_text(size = 6)) +
+  theme(axis.text.x = element_text(size = 6),
+        axis.text.y = element_text(size = 6)) +
   labs(title = "Weekly Median Price for Center-Based Childcare ($)",
        x = "Study Year",
        y = NULL,
