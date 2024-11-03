@@ -65,17 +65,18 @@ ca_childcare <- counties |>
 #| label: recoding-county-to-census-regions
 # Collapse counties into Census regions
 ca_childcare <- ca_childcare |>
+  mutate(county_name = str_remove(county_name, " County")) |>
   mutate(region = fct_collapse(county_name,
-                               "Superior California" = c("Butte County", "Colusa County", "El Dorado County", "Glenn County", "Lassen County", "Modoc County", "Nevada County", "Placer County", "Plumas County", "Sacramento County", "Shasta County", "Sierra County", "Siskiyou County", "Sutter County", "Tehama County", "Yolo County", "Yuba County"),
-                               "North Coast" = c("Del Norte County", "Humboldt County", "Lake County", "Mendocino County", "Napa County", "Sonoma County", "Trinity County"),
-                               "San Francisco Bay Area" = c("Alameda County", "Contra Costa County", "Marin County", "San Francisco County", "San Mateo County", "Santa Clara County", "Solano County"),
-                               "Northern San Joaquin Valley" = c("Alpine County", "Amador County", "Calaveras County", "Madera County", "Mariposa County", "Merced County", "Mono County", "San Joaquin County", "Stanislaus County", "Tuolumne County"),
-                               "Central Coast" = c("Monterey County", "San Benito County", "San Luis Obispo County", "Santa Barbara County", "Santa Cruz County", "Ventura County"),
-                               "Southern San Joaquin Valley" = c("Fresno County", "Inyo County", "Kern County", "Kings County", "Tulare County"),
-                               "Inland Empire" = c("Riverside County", "San Bernardino County"),
-                               "Los Angeles County" = c("Los Angeles County"), 
-                               "Orange County" = c("Orange County"), 
-                               "San Diego - Imperial" = c("San Diego County", "Imperial County")))
+                               "Superior California" = c("Butte", "Colusa", "El Dorado", "Glenn", "Lassen", "Modoc", "Nevada", "Placer", "Plumas", "Sacramento", "Shasta", "Sierra", "Siskiyou", "Sutter", "Tehama", "Yolo", "Yuba"),
+                               "North Coast" = c("Del Norte", "Humboldt", "Lake", "Mendocino", "Napa", "Sonoma", "Trinity"),
+                               "San Francisco Bay Area" = c("Alameda", "Contra Costa", "Marin", "San Francisco", "San Mateo", "Santa Clara", "Solano"),
+                               "Northern San Joaquin Valley" = c("Alpine", "Amador", "Calaveras", "Madera", "Mariposa", "Merced", "Mono", "San Joaquin", "Stanislaus", "Tuolumne"),
+                               "Central Coast" = c("Monterey", "San Benito", "San Luis Obispo", "Santa Barbara", "Santa Cruz", "Ventura"),
+                               "Southern San Joaquin Valley" = c("Fresno", "Inyo", "Kern", "Kings", "Tulare"),
+                               "Inland Empire" = c("Riverside", "San Bernardino"),
+                               "Los Angeles County" = c("Los Angeles"), 
+                               "Orange County" = c("Orange"), 
+                               "San Diego - Imperial" = c("San Diego", "Imperial")))
                                
 
 ```
