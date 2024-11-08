@@ -133,8 +133,9 @@ ca_childcare |>
   ggplot(mapping = aes(
     x = study_year,
     y = median_cost,
-    colour = fct_reorder(.f = region,
-                         .x = study_year)
+    colour = fct_reorder2(.f = region,
+                         .x = study_year,
+                         .y = median_cost)
   )) +
   geom_point() +
   geom_smooth() +
