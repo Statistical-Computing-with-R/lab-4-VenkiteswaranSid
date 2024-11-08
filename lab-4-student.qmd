@@ -77,8 +77,6 @@ ca_childcare <- ca_childcare |>
                                "Los Angeles County" = c("Los Angeles"), 
                                "Orange County" = c("Orange"), 
                                "San Diego - Imperial" = c("San Diego", "Imperial")))
-                               
-
 ```
 
 
@@ -91,7 +89,8 @@ ca_childcare |>
            study_year == 2018) |>
   group_by(region, study_year) |>
   summarise(median_income = median(mhi_2018)) |>
-  pivot_wider(names_from = study_year, values_from = median_income) |>
+  pivot_wider(names_from = study_year, 
+              values_from = median_income) |>
   arrange(by = `2018`)
 ```
 
@@ -116,21 +115,26 @@ No, this answer does not correspond with the answer that we got in the previous 
 ```{r}
 #| label: recreate-plot
 ## Used this to change facet labels: https://stackoverflow.com/questions/48860158/changing-ggplot2facet-wrap-title-from-the-default
+library(RColorBrewer)
+custom_palette <- colorRampPalette(brewer.pal(8, "BrBG"))(10)
+
 ca_childcare |>
   pivot_longer(cols = mc_infant:mc_preschool,
                names_to = "childcare_level",
                values_to = "median_cost") |>
-  mutate(across(
-    childcare_level, 
-    ~fct(., 
-            levels = c(
-              "mc_infant",
-              "mc_toddler",
-              "mc_preschool")))) |>
+  mutate(
+    across(
+      childcare_level, 
+      ~fct(., 
+           levels = c(
+             "mc_infant",
+             "mc_toddler",
+             "mc_preschool")))) |>
   ggplot(mapping = aes(
     x = study_year,
     y = median_cost,
-    colour = region
+    colour = fct_reorder(.f = region,
+                         .x = study_year)
   )) +
   geom_point() +
   geom_smooth() +
@@ -142,6 +146,8 @@ ca_childcare |>
                                      "mc_toddler" = "Toddler"))) + 
   scale_y_continuous(limits = c(100, 500)) +
   scale_x_continuous(breaks = seq(2008, 2018, by = 2)) +
+  scale_color_manual(values = custom_palette) + 
+  theme_bw() +
   theme(axis.text.x = element_text(size = 6),
         axis.text.y = element_text(size = 6),
         legend.text = element_text(size = 7), 
@@ -152,7 +158,7 @@ ca_childcare |>
        x = "Study Year",
        y = NULL,
        color = "California Region") +
-  coord_fixed(ratio = 0.03)
+  coord_fixed(ratio = 0.03) 
 ```
 
 
